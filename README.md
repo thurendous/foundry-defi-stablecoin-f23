@@ -14,3 +14,5 @@
 -   added a bunch of view function
 
 1. What are our invariants/properties?
+
+-   This is quite important for us.

@@ -4,9 +4,13 @@ out = "out"
 libs = ["lib"]
 remappings=[]
 
-[invariants]
-runs = 128
-depth = 128
-fail_on_revert
+[invariant]
+runs = 500 # the number of runs to perform
+depth = 128 # the number of calls in a single run 
+fail_on_revert = false # if true, revert will fail if the invariant is not satisfied
+# this can be true or false
+# true means if it reverts then fail
+# false means even if it reverts make it pass
+# you should use it based on your situation
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config

@@ -371,10 +371,14 @@ contract DSCEngine is ReentrancyGuard {
     }
 
     // check health factor from the inside
-    function calculateHealthFactor(uint256 totalMinted, uint256 collateralValueInUsd) internal view returns (uint256) {
+    function calculateHealthFactor(uint256 totalMinted, uint256 collateralValueInUsd) internal pure returns (uint256) {
         if (totalMinted == 0) return type(uint256).max; // this is for avoiding deviding by zero
         uint256 collateralAdjustedForThreshold = (collateralValueInUsd * LIQUIDATION_THRESHOLD) / LIQUIDATION_PRECISION;
         return (collateralAdjustedForThreshold * PRECISION) / totalMinted;
+    }
+
+    function getCollateralTokens() external view returns (address[] memory) {
+        return s_collateralTokens;
     }
 }
 
