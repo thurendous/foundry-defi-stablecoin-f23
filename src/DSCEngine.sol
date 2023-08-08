@@ -370,15 +370,30 @@ contract DSCEngine is ReentrancyGuard {
         return _getAccountInformation(user);
     }
 
+    function calculateHealthFactor(uint256 totalMinted, uint256 collateralValueInUsd) public pure returns (uint256) {
+        return _calculateHealthFactor(totalMinted, collateralValueInUsd);
+    }
+
     // check health factor from the inside
-    function calculateHealthFactor(uint256 totalMinted, uint256 collateralValueInUsd) internal pure returns (uint256) {
+    function _calculateHealthFactor(uint256 totalMinted, uint256 collateralValueInUsd)
+        internal
+        pure
+        returns (uint256)
+    {
         if (totalMinted == 0) return type(uint256).max; // this is for avoiding deviding by zero
         uint256 collateralAdjustedForThreshold = (collateralValueInUsd * LIQUIDATION_THRESHOLD) / LIQUIDATION_PRECISION;
         return (collateralAdjustedForThreshold * PRECISION) / totalMinted;
     }
 
+    //////////////////////////////////
+    /// Getter view/pure functions ///
+    //////////////////////////////////
     function getCollateralTokens() external view returns (address[] memory) {
         return s_collateralTokens;
+    }
+
+    function getCollateralBalanceOfUser(address user, address token) external view returns (uint256) {
+        return s_collateralDeposited[user][token];
     }
 }
 

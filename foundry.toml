@@ -5,11 +5,13 @@ libs = ["lib"]
 remappings=[]
 
 [invariant]
-runs = 500 # the number of runs to perform
+runs = 300 # the number of runs to perform
 depth = 128 # the number of calls in a single run 
-fail_on_revert = false # if true, revert will fail if the invariant is not satisfied
+fail_on_revert = true # if true, revert will fail if the invariant is not satisfied
 # this can be true or false
 # true means if it reverts then fail
+# if you set this as fales, then it will pass even if it reverts. 
+# if you set this as true, then it will fail if it reverts. It seems this is more efficient, but it is hard for us to know if it is a false positive or not.
 # false means even if it reverts make it pass
 # you should use it based on your situation
 

@@ -6,6 +6,9 @@
 // 2. Getter view functions should never revert.
 // 3. maybe more to come but we will focus on these 2 for now.
 
+// in Foundry, fuzz test is stateless fuzzing
+// invariant test is the stateful fuzzing
+
 pragma solidity 0.8.18;
 
 import {Test, console} from "forge-std/Test.sol";
@@ -20,7 +23,7 @@ import {Handler} from "./Handler.t.sol";
 // stateless fuzzing: stateless means the tests everytime is isolated
 // stateful fuzzing: invariant fuzzing means the tests everytime is related
 
-contract Invariants is StdInvariant, Test {
+contract InvariantsTest is StdInvariant, Test {
     DeployDSC deployer;
     DSCEngine dsce;
     DecentralizedStableCoin dsc;
